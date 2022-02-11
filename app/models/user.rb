@@ -2,8 +2,8 @@ class User
   include Mongoid::Document
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :trackable, :confirmable, :lockable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :confirmable
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -17,11 +17,11 @@ class User
   field :remember_created_at, type: Time
 
   ## Trackable
-  field :sign_in_count,      type: Integer, default: 0
-  field :current_sign_in_at, type: Time
-  field :last_sign_in_at,    type: Time
-  field :current_sign_in_ip, type: String
-  field :last_sign_in_ip,    type: String
+  # field :sign_in_count,      type: Integer, default: 0
+  # field :current_sign_in_at, type: Time
+  # field :last_sign_in_at,    type: Time
+  # field :current_sign_in_ip, type: String
+  # field :last_sign_in_ip,    type: String
 
   ## Confirmable
   field :confirmation_token,   type: String
@@ -30,8 +30,9 @@ class User
   field :unconfirmed_email,    type: String # Only if using reconfirmable
 
   ## Lockable
-  field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  field :locked_at,       type: Time
+  # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
+  # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
+  # field :locked_at,       type: Time
+  alias will_save_change_to_email? email_changed?
   include Mongoid::Timestamps
 end
